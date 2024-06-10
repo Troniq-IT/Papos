@@ -1,0 +1,53 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Component {
+  content   Json?
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  typeField String?
+  updatedAt DateTime @updatedAt
+}
+
+model Theme {
+  createdAt   DateTime @default(now())
+  description String?
+  id          String   @id @default(cuid())
+  name        String?
+  updatedAt   DateTime @updatedAt
+  version     String?
+}
+
+model Template {
+  createdAt DateTime @default(now())
+  html      String?
+  id        String   @id @default(cuid())
+  name      String?
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  createdAt          DateTime @default(now())
+  email              String?  @unique
+  emailAddress       String?
+  firstName          String?
+  id                 String   @id @default(cuid())
+  lastName           String?
+  password           String
+  roles              Json
+  uniqueEmailAddress String?
+  uniqueFirstName    String?
+  uniqueLastName     String?
+  uniqueUsername     String?
+  uniqueUserPassword String?
+  updatedAt          DateTime @updatedAt
+  username           String   @unique
+  userName           String?
+  userPassword       String?
+}
